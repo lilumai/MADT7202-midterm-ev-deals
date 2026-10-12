@@ -1,0 +1,30 @@
+model_a,group_a,model_b,group_b,comments,videos,npmi
+Atto 2,S-EV,Atto 3,M-EV,6,5,0.381
+Atto 2,S-EV,Dolphin,S-EV,3,3,0.223
+Atto 3,M-EV,Dolphin,S-EV,5,5,0.327
+Dolphin,S-EV,EX2,S-EV,4,3,0.008
+Nevo Q05,S-EV,ORA 5 EV,S-EV,5,5,0.326
+Nevo Q05,S-EV,Jaecoo 5,S-EV,7,6,0.309
+Nevo Q05,S-EV,MG Urban,S-EV,3,3,0.12
+ORA 5 HEV,S-ICE,Yaris Cross,S-ICE,4,3,0.183
+ORA 5 HEV,S-ICE,XForce,S-ICE,5,3,0.122
+Yaris Cross,S-ICE,HR-V,S-ICE,11,6,0.247
+Yaris Cross,S-ICE,Kicks,S-ICE,10,5,0.241
+Yaris Cross,S-ICE,City,S-ICE,3,3,-0.139
+Yaris Cross,S-ICE,XForce,S-ICE,9,5,0.074
+Atto 1,S-EV,EX2,S-EV,8,3,0.196
+EX2,S-EV,UT,S-EV,33,7,0.272
+City,S-ICE,Yaris Ativ,S-ICE,27,14,0.292
+City,S-ICE,Yaris,S-ICE,8,7,0.037
+City,S-ICE,Civic,M-ICE,5,5,-0.179
+City,S-ICE,Swift,S-ICE,3,3,-0.152
+Yaris Ativ,S-ICE,Yaris,S-ICE,5,5,0.061
+XForce,S-ICE,Kicks,S-ICE,10,5,0.12
+XForce,S-ICE,HR-V,S-ICE,16,7,0.215
+HR-V,S-ICE,Kicks,S-ICE,8,4,0.194
+MG Urban,S-EV,MG4,S-EV,6,5,0.192
+Aion V,M-EV,EX5,M-EV,3,3,0.292
+CR-V,M-ICE,Civic,M-ICE,4,4,-0.033
+Civic,M-ICE,Altis,M-ICE,14,4,0.278
+Civic,M-ICE,Camry,M-ICE,5,4,-0.104
+Yaris,S-ICE,Swift,S-ICE,4,3,0.032

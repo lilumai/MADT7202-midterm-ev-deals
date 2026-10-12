@@ -22,13 +22,14 @@ Question: each month a Thai bank's Head of Pricing and Strategy (auto finance) s
 | 8 | inspect_edges.py | comments behind chosen pairs (hand audit, read locally) | 4 Filtering, 6 Finding 3, 8 |
 | 9 | make_figure.py | figure_baseline.png | 5 The picture |
 | 10 | count_models_v3.py, build_graph_v3.py, cross_fuel_check_v3.py | sensitivity: Aion V and Aion Y added as nodes | 4 Alternatives |
+| 11 | count_models_v4.py, build_graph_v4.py, cross_fuel_check_v4.py | sensitivity: v3 plus Thai spellings of 6 models (Yaris, Yaris Ativ, Yaris Cross, Kicks, Swift, Dolphin): 29 links, 0 fuel-crossing, no Geely to MG path at 3 or more videos; City is the top connector in 30 of 40 runs | 4 Alternatives, 6 Finding 3 |
 
 ## Decisions fixed before results
 Edge = two models in one comment; keep a pair only if seen under 3 or more different videos; groups = size x fuel (ICE incl. HEV/PHEV/REEV, or BEV); gate: inside share 0.80 or more and one piece without the top-betweenness node means no bridge.
-Changed after the hand audit and disclosed in the report: ORA 5 split into EV and HEV; choice-word and max-3-models variants added; Aion V and Y added as a sensitivity test.
+Changed after the hand audit and disclosed in the report: ORA 5 split into EV and HEV; choice-word and max-3-models variants added; Aion V and Y, and Thai spellings of 6 models, added as sensitivity tests (v3, v4).
 
 ## Limits
-Commenters are not buyers; creators choose which models a video compares; one person may post under several videos; MG5, MG ZS, MG HS are not matched by the name list (22 comments or fewer); the Pantip list comes from scrolling two search result lists and may be incomplete.
+Commenters are not buyers; creators choose which models a video compares; one person may post under several videos; MG5, MG ZS, MG HS and most Thai spellings are not matched by the name list (MG5/ZS/HS: 22 comments or fewer); the Pantip list comes from scrolling two search result lists and may be incomplete.
 
 ## Install
 pip install -r requirements.txt (Python 3.9 or later)
