@@ -15,15 +15,15 @@ Question: each month a Thai bank's Head of Pricing and Strategy (auto finance) s
 | 1 | youtube_collect.py, youtube_collect2.py | raw data (not committed) | 3 Data |
 | 2 | extract_candidates.py | window check, name candidates | 3 Data |
 | 3 | count_models_v2.py | model mentions, ORA 5 split EV/HEV, comment_models_v2.csv | 3 Data, 4 Filtering |
-| 4 | build_graph_v2.py | 23 nodes, 26 links, 3 pieces; inside share; betweenness; 40-run robustness grid; graph_edges_baseline_v2.csv | 4 Result and Alternatives, 6 Findings |
-| 5 | cross_fuel_check.py | fuel-crossing links at 1, 2, 3 videos; Geely to MG paths | 6 Findings 1-2 |
-| 6 | batch_replication.py | batch 1 vs batch 2 | 3 Corroboration, 6 Finding 1 |
-| 7 | pantip_check.py | Pantip counts; models missing from the alias list | 3 Data, 6, 8 |
+| 4 | build_graph_v2.py | 23 nodes, 26 links, 3 pieces; inside share; betweenness; 40-run robustness grid; graph_edges_baseline_v2.csv | 4 Weight/pruning and Alternatives, 6 Findings |
+| 5 | cross_fuel_check.py | fuel-crossing links at 1, 2, 3 videos; Geely to MG paths | 5 table, 4 Alternatives, 6 Finding 1 |
+| 6 | batch_replication.py | batch 1 vs batch 2 | 5 table, 6 Finding 1 |
+| 7 | pantip_check.py | Pantip counts; models missing from the alias list | 3 Pantip check, 6 Finding 1, 8 |
 | 8 | inspect_edges.py | comments behind chosen pairs (hand audit, read locally) | 4 Filtering, 6 Finding 3, 8 |
 | 9 | make_figure.py | figure_baseline.png | 5 The picture |
 | 10 | count_models_v3.py, build_graph_v3.py, cross_fuel_check_v3.py | sensitivity: Aion V and Aion Y added as nodes | 4 Alternatives |
 | 11 | count_models_v4.py, build_graph_v4.py, cross_fuel_check_v4.py | sensitivity: v3 plus Thai spellings of 6 models (Yaris, Yaris Ativ, Yaris Cross, Kicks, Swift, Dolphin): 29 links, 0 fuel-crossing, no Geely to MG path at 3 or more videos; City is the top connector in 30 of 40 runs | 4 Alternatives, 6 Finding 3 |
-| 12 | overlap_geely_aion_mg.py | comments naming a Geely model together with an Aion model vs with an MG model (EX2 to Aion UT: 33 comments in 7 videos; Geely to MG: 7 comments in total; EX5 to Aion V: 3) | 4 Alternatives, 6 Finding 2, 7 |
+| 12 | overlap_geely_aion_mg.py | comments naming a Geely model together with an Aion model vs with an MG model (EX2 to Aion UT: 33 comments in 7 videos; Geely to MG: 7 comments in total; EX5 to Aion V: 3) | 6 Finding 2, 7 |
 
 ## Decisions fixed before results
 Edge = two models in one comment; keep a pair only if seen under 3 or more different videos; groups = size x fuel (ICE incl. HEV/PHEV/REEV, or BEV); gate: inside share 0.80 or more and one piece without the top-betweenness node means no bridge.
