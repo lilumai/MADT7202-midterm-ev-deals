@@ -20,7 +20,7 @@ Question: each month a Thai bank's Head of Pricing and Strategy (auto finance) s
 | 6 | batch_replication.py | batch 1 vs batch 2 | 5 table, 6 Finding 1 |
 | 7 | pantip_check.py | Pantip counts; models missing from the alias list | 3 Pantip check, 6 Finding 1, 8 |
 | 8 | inspect_edges.py | comments behind chosen pairs (hand audit, read locally) | 4 Filtering, 6 Finding 3, 8 |
-| 9 | make_figure.py | figure_baseline.png | 5 The picture |
+| 9 | make_figure_final.py | figure_final.png (8.4 cm wide, labels 7 pt; layout chosen so no link crosses another dot) | 5 The picture |
 | 10 | count_models_v3.py, build_graph_v3.py, cross_fuel_check_v3.py | sensitivity: Aion V and Aion Y added as nodes | 4 Alternatives |
 | 11 | count_models_v4.py, build_graph_v4.py, cross_fuel_check_v4.py | sensitivity: v3 plus Thai spellings of 6 models (Yaris, Yaris Ativ, Yaris Cross, Kicks, Swift, Dolphin): 29 links, 0 fuel-crossing, no Geely to MG path at 3 or more videos; City is the top connector in 30 of 40 runs | 4 Alternatives, 6 Finding 3 |
 | 12 | overlap_geely_aion_mg.py | comments naming a Geely model together with an Aion model vs with an MG model (EX2 to Aion UT: 33 comments in 7 videos; Geely to MG: 7 comments in total; EX5 to Aion V: 3) | 6 Finding 2, 7 |
