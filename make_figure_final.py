@@ -30,9 +30,10 @@ HW, HH = 0.215, 0.175                                   # half width / height of
 def box_layout(nodes, seed):
     sub = G.subgraph(nodes)          # each connected piece gets its own strip of the box
     comps = sorted((sorted(c) for c in nx.connected_components(sub)), key=lambda c: (-len(c), c))
-    tot = sum(len(c) + 1 for c in comps); left = -1.0; p = {}
+    GAP = 1.5                        # empty space between two pieces in the same box, so they read as separate
+    tot = sum(len(c) + 1 for c in comps) + GAP * (len(comps) - 1); left = -1.0; p = {}
     for c in comps:
-        wdt = 2.0 * (len(c) + 1) / tot; ccx = left + wdt / 2; left += wdt
+        wdt = 2.0 * (len(c) + 1) / tot; ccx = left + wdt / 2; left += wdt + 2.0 * GAP / tot
         if len(c) == 1: lp = {c[0]: (0.0, 0.0)}
         elif len(c) == 2: lp = {c[0]: (0.0, 0.6), c[1]: (0.0, -0.6)}
         else:
@@ -45,7 +46,7 @@ def box_layout(nodes, seed):
                       0.4 * lp[n][1] / m0 + 0.6 * (2 * ry[n] / L - 1)) for n in lp}
         m = max(max(abs(x), abs(y)) for x, y in lp.values()) or 1.0
         for n, (x, y) in lp.items():
-            p[n] = (ccx + 0.42 * wdt * x / m, 0.85 * y / m)
+            p[n] = (ccx + 0.40 * wdt * x / m, 0.85 * y / m)
     return p
 def place_box(g, layout, r, f):
     cx, cy = CENTER[g]; c, s_ = math.cos(math.radians(r)), math.sin(math.radians(r))
@@ -91,12 +92,17 @@ def clash(n, xy, P, placed):
     c = 0
     for m, (x2, y2) in placed.items():                  # keep a visible gap between two labels
         if m != n and abs(xy[0] - x2) < (lw(n) + lw(m)) / 2 + 0.012 and abs(xy[1] - y2) < 0.045: c += 3
-    cx_, cy_ = xy[0], xy[1] + 0.02                       # label centre: it should be nearer to its own dot than to any other dot
-    d_own = math.hypot(cx_ - P[n][0], cy_ - P[n][1])
-    for m, (px, py) in P.items():
-        if m != n and math.hypot(cx_ - px, cy_ - py) < d_own: c += 2
-    for m, (px, py) in P.items():                       # a label must not sit on top of another dot
-        if m != n and abs(xy[0] - px) < lw(n) / 2 + 0.012 and xy[1] - 0.012 < py < xy[1] + 0.05: c += 3
+    h = lw(n) / 2                                        # label box: x in [xy0-h, xy0+h], y in [xy1, xy1+0.04]
+    def box_gap(m):                                      # gap between the label box and the edge of dot m
+        px, py = P[m]
+        dx = max(xy[0] - h - px, 0, px - (xy[0] + h)); dy = max(xy[1] - py, 0, py - (xy[1] + 0.04))
+        return math.hypot(dx, dy) - max(rx_(m), ry_(m))
+    g_own = box_gap(n)
+    for m in P:
+        if m == n: continue
+        g = box_gap(m)
+        if g < 0.004: c += 6                             # label touches or covers another dot
+        elif g < g_own + 0.01: c += 3                    # label is about as near to another dot as to its own
     for a_, b_ in G.edges:                              # ... or on top of any link (near its own dot excluded)
         for t in (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0):
             qx = P[a_][0] + t * (P[b_][0] - P[a_][0]); qy = P[a_][1] + t * (P[b_][1] - P[a_][1])
@@ -109,6 +115,8 @@ def place_labels(P):
         x, y = P[n]; h = lw(n) / 2
         opts = [(x, y + ry_(n) + 0.012),                                                  # above (preferred),
                 (x + rx_(n) + 0.012 + h, y - 0.02), (x - rx_(n) - 0.012 - h, y - 0.02),    # right, left,
+                (x + rx_(n) + 0.004 + h, y + ry_(n) * 0.5), (x - rx_(n) - 0.004 - h, y + ry_(n) * 0.5),   # upper right / left,
+                (x + rx_(n) + 0.004 + h, y - ry_(n) * 0.5 - 0.04), (x - rx_(n) - 0.004 - h, y - ry_(n) * 0.5 - 0.04),  # lower right / left,
                 (x, y - ry_(n) - 0.012 - 0.04)]                                           # below (last resort)
         placed[n] = min(opts, key=lambda xy: (clash(n, xy, P, placed), opts.index(xy)))
     cost = sum(clash(n, placed[n], P, placed) for n in G)                                 # final check, all labels in place
